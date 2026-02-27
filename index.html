@@ -2,9 +2,31 @@
 <html>
 <head>
   <title>Mon Chat CometChat</title>
+
+  <script defer src="https://widget-js.cometchat.io/v3/cometchatwidget.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      CometChatWidget.init({
+        appID: "167562823bae0e59a",
+        appRegion: "eu",
+        authKey: "d17e17ba71914e829f39816985b294907135a441"
+      }).then(response => {
+        CometChatWidget.login({ uid: "user1" }).then(response => {
+          CometChatWidget.launch({
+            widgetID: "6998111a217a8080a641fbc2",
+            target: "#cometchat"
+          });
+        });
+      });
+    });
+  </script>
+
 </head>
 <body>
-  <h1>Test CometChat</h1>
-  <p>Mon site fonctionne 🎉</p>
+
+<h1>Chat en ligne</h1>
+<div id="cometchat" style="width: 100%; height: 600px;"></div>
+
 </body>
 </html>
