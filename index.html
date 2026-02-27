@@ -1,36 +1,76 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat en ligne</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chat en ligne</title>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/@cometchat/chat-embed@1.x.x/dist/main.js"></script>
-</head>
+    <!-- CometChat Chat Widget (Embed) -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/@cometchat/chat-embed@1.x.x/dist/main.js"
+    ></script>
 
-<body>
-  <h1>Chat en ligne</h1>
-  <div id="cometChatMount"></div>
+    <style>
+      body {
+        font-family: Georgia, serif;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        margin: 30px;
+        font-size: 48px;
+      }
+      #cometChatMount {
+        min-height: 650px;
+      }
+    </style>
+  </head>
 
-  <script type="module">
-    const COMETCHAT_WIDGET_CONFIG = {
-      appID: "167562823bae0e59a",
-      region: "eu",
+  <body>
+    <h1>Chat en ligne</h1>
 
-      mode: "guest",
-      authKey: "<<<d17e17ba71914e829f39816985b294907135a441>>>",
+    <!-- Là où le widget doit se monter -->
+    <div id="cometChatMount"></div>
 
-      user: { name: "Guest User", avatar: "", link: "" },
+    <script type="module">
+      // ✅ Mets TES valeurs ici
+      const COMETCHAT_WIDGET_CONFIG = {
+        appID: "167562823bae0e59a",
+        region: "eu",
 
-      mount: "#cometChatMount",
-      width: "700px",
-      height: "600px",
-      isDocked: true,
+        // Mode invité (OK pour test)
+        mode: "guest",
+        authKey: "d17e17ba71914e829f39816985b294907135a441", // ⚠️ évite de le laisser sur un repo public
 
-      variantID: "69a1bc3a217a8080a6446649"
-    };
+        // Optionnel : profil “guest”
+        user: {
+          name: "Visiteur",
+          avatar: "",
+          link: "",
+        },
 
-    CometChatApp.CometChatAuth.start(COMETCHAT_WIDGET_CONFIG);
-  </script>
-</body>
+        // Placement / taille
+        mount: "#cometChatMount",
+        width: "450px",
+        height: "80vh",
+        isDocked: true,
+
+        // ✅ Ton Variant ID (important sinon “Widget settings not found”)
+        variantID: "69a1bc3a217a8080a6446649",
+      };
+
+      // Attendre que le script CometChat soit chargé (defer)
+      function startWhenReady() {
+        if (window.CometChatApp?.CometChatAuth?.start) {
+          window.CometChatApp.CometChatAuth.start(COMETCHAT_WIDGET_CONFIG);
+          console.log("CometChat: initialisé");
+        } else {
+          setTimeout(startWhenReady, 50);
+        }
+      }
+
+      startWhenReady();
+    </script>
+  </body>
 </html>
