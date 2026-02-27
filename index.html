@@ -1,32 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chat Prestige</title>
+  <title>Chat en ligne</title>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/@cometchat/chat-widget@latest/dist/cometchatwidget.js"></script>
+  <script defer src="https://widget-js.cometchat.io/v3/cometchatwidget.js"></script>
+
+  <script>
+    window.addEventListener("load", function () {
+      CometChatWidget.init({
+        appID: "167562823bae0e59a",
+        appRegion: "eu",
+        authKey: "d17e17ba71914e829f39816985b294907135a441"
+      }).then(() => {
+
+        // IMPORTANT: l’utilisateur doit exister dans CometChat
+        return CometChatWidget.login({ uid: "testuser1" });
+
+      }).then(() => {
+
+        CometChatWidget.launch({
+          widgetID: "6998111a217a8080a641fbc2",
+          target: "#cometchat",
+          roundedCorners: true,
+          height: "600px",
+          width: "100%"
+        });
+
+      }).catch((e) => {
+        console.error("CometChat error:", e);
+      });
+    });
+  </script>
 </head>
+
 <body>
-
-<h1>Chat en ligne</h1>
-
-<div id="cometChatMount"></div>
-
-<script type="module">
-  const COMETCHAT_WIDGET_CONFIG = {
-    appID: "167562823bae0e59a",
-    region: "eu",
-    mode: "authToken",
-    authToken: "testuser1_177159258453d2f1b0b07a7cf030d55631b729f7",
-    mount: "#cometChatMount",
-    width: "100%",
-    height: "600px",
-    isDocked: false
-  };
-
-  CometChatApp.CometChatAuth.start(COMETCHAT_WIDGET_CONFIG);
-</script>
-
+  <h1>Chat en ligne</h1>
+  <div id="cometchat" style="width:100%; height:600px;"></div>
 </body>
 </html>
