@@ -1,48 +1,37 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr">
 <head>
-  <title>Mon Chat CometChat</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat en ligne</title>
 
-  <script defer src="https://widget-js.cometchat.io/v3/cometchatwidget.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-
-      CometChatWidget.init({
-        appID: "167562823bae0e59a",
-        appRegion: "eu",
-        authKey: "d17e17ba71914e829f39816985b294907135a441"
-      }).then(response => {
-
-        console.log("CometChat initialisé");
-
-        CometChatWidget.login({
-          uid: "testuser1"
-        }).then(response => {
-
-          console.log("Utilisateur connecté");
-
-          CometChatWidget.launch({
-            widgetID: "69a1bc3a217a8080a6446649",
-            target: "#cometchat"
-          });
-
-        }).catch(error => console.error(error));
-
-      }).catch(error => console.error(error));
-    });
-  </script>
-
+  <!-- ✅ Le bon script pour le Widget Builder -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@cometchat/chat-embed@1.x.x/dist/main.js"></script>
 </head>
-<body>
-
-<h1>Chat en ligne</h1>
-<div id="cometchat" style="width: 100%; height: 600px;"></div>
-
-</body>
-</html>
 
 <body>
   <h1>Chat en ligne</h1>
+
+  <!-- ✅ Là où le widget s’affiche -->
+  <div id="cometChatMount"></div>
+
+  <script type="module">
+    const COMETCHAT_WIDGET_CONFIG = {
+      appID: "167562823bae0e59a",
+      region: "eu",
+      mode: "guest",
+      authKey: "d17e17ba71914e829f39816985b294907135a441",
+
+      mount: "#cometChatMount",
+      width: "700px",
+      height: "600px",
+      isDocked: true,
+
+      variantID: "69a1bc3a217a8080a6446649",
+      // dockedAlignment: "right" // ou "left"
+    };
+
+    CometChatApp.CometChatAuth.start(COMETCHAT_WIDGET_CONFIG);
+  </script>
 </body>
 </html>
