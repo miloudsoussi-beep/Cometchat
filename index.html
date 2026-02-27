@@ -5,38 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chat en ligne</title>
 
-  <!-- Script officiel CometChat Widget -->
   <script defer src="https://widget-js.cometchat.io/v3/cometchatwidget.js"></script>
 
   <script>
     window.addEventListener("load", function () {
-
       CometChatWidget.init({
         appID: "167562823bae0e59a",
         appRegion: "eu",
         authKey: "d17e17ba71914e829f39816985b294907135a441"
       })
+      .then(() => CometChatWidget.login({ uid: "testuser1" }))
       .then(() => {
-        console.log("CometChat initialisé");
-
-        return CometChatWidget.login({
-          uid: "testuser1"
-        });
-
-      })
-      .then(() => {
-        console.log("Utilisateur connecté");
-
         CometChatWidget.launch({
           widgetID: "6998111a217a8080a641fbc2",
           docked: true
         });
-
       })
-      .catch(error => {
-        console.error("Erreur CometChat :", error);
-      });
-
+      .catch(err => console.error("Erreur CometChat:", err));
     });
   </script>
 </head>
