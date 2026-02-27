@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mon Chat</title>
+
+  <script defer src="https://widget-js.cometchat.io/v3/cometchatwidget.js"></script>
 </head>
 <body>
+  <h1>Chat en ligne</h1>
 
-<h1>Chat en ligne</h1>
+  <div id="cometchat" style="width: 100%; height: 600px;"></div>
 
-<script>
-window.CometChatWidget = {
-  appID: "167562823bae0e59a",
-  region: "eu",
-  widgetID: "6998111a217a8080a641fbc2"
-};
-</script>
-<script src="https://widget-js.cometchat.io/v3/cometchatwidget.js"></script>
-
+  <script>
+    window.addEventListener("load", function () {
+      // Lance le widget (sans authKey)
+      CometChatWidget.init({
+        appID: "167562823bae0e59a",
+        appRegion: "eu",
+        widgetID: "6998111a217a8080a641fbc2"
+      }).then(function () {
+        CometChatWidget.launch({
+          widgetID: "6998111a217a8080a641fbc2",
+          target: "#cometchat",
+          roundedCorners: true,
+          height: "600px",
+          width: "100%",
+          defaultID: "user1",        // utilisateur demo
+          defaultType: "user"
+        });
+      }).catch(function (e) {
+        console.error("CometChat error:", e);
+      });
+    });
+  </script>
 </body>
 </html>
