@@ -1,20 +1,43 @@
-<script type="module">
-  const COMETCHAT_WIDGET_CONFIG = {
-    appID: "167562823bae0e59a",
-    region: "eu",
-    mode: "uid",   // 👈 important
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Chat CometChat</title>
 
-    authKey: "d17e17ba71914e829f39816985b294907135a441",
+  <!-- ✅ IMPORTANT : charge CometChatApp -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@cometchat/chat-embed@latest/dist/main.js"></script>
+</head>
 
-    uid: "testuser1",  // 👈 ton utilisateur réel
+<body>
+  <h1>Chat en ligne</h1>
 
-    mount: "#cometChatMount",
-    width: "700px",
-    height: "600px",
-    isDocked: true,
+  <!-- ✅ Zone où le widget s'affiche -->
+  <div id="cometChatMount"></div>
 
-    variantID: "69a1bc3a217a8080a6446649"
-  };
+  <script>
+    // ⚠️ Ne change que les valeurs entre guillemets
+    const COMETCHAT_WIDGET_CONFIG = {
+      appID: "167562823bae0e59a",
+      region: "eu",
 
-  CometChatApp.CometChatAuth.start(COMETCHAT_WIDGET_CONFIG);
-</script>
+      // ✅ Mode utilisateur réel
+      mode: "uid",
+      authKey: "d17e17ba71914e829f39816985b294907135a441",
+      uid: "testuser1",
+
+      // ✅ Ta variante (important)
+      variantID: "69a1bc3a217a8080a6446649",
+
+      // ✅ Affichage
+      mount: "#cometChatMount",
+      width: "700px",
+      height: "600px",
+      isDocked: true
+    };
+
+    // Lance le widget
+    CometChatApp.CometChatAuth.start(COMETCHAT_WIDGET_CONFIG);
+  </script>
+</body>
+</html>
